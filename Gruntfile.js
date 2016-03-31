@@ -27,14 +27,14 @@ module.exports = function(grunt) {
       }
     },
 
-    // uglify: {
-    // },
+    uglify: {
+    },
 
-    // eslint: {
-    //   target: [ ""
-    //     // Add list of files to lint here
-    //   ]
-    // },
+    eslint: {
+      target: [ ""
+        // Add list of files to lint here
+      ]
+    },
 
     cssmin: {
     },
