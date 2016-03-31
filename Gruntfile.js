@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['public/client/**/*.js'],
-        dist: 'public/dist/built.js'
+        dest: 'public/dist/built.js'
       }
     },
 
@@ -28,11 +28,17 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      target: {
+        files: {
+          'public/dist/built.min.js' : ['public/dist/built.js'] //use if concat has happened first (otherwise no built.js file), otherwise could just use 'public/client/**/*.js'
+        }
+      }
     },
 
     eslint: {
       target: [
         // Add list of files to lint here
+        '**/*.js'
       ]
     },
 
