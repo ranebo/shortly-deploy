@@ -3,6 +3,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        src: ['public/client/**/*.js'],
+        dist: 'public/dist/built.js'
+      }
     },
 
     mochaTest: {
@@ -20,14 +27,14 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: {
-    },
+    // uglify: {
+    // },
 
-    eslint: {
-      target: [
-        // Add list of files to lint here
-      ]
-    },
+    // eslint: {
+    //   target: [ ""
+    //     // Add list of files to lint here
+    //   ]
+    // },
 
     cssmin: {
     },
