@@ -6,23 +6,19 @@ var Schema = mongoose.Schema;
 
 var LinkSchema = new Schema({
   url: {
-    type: String,
-    required: true
+    type: String
   },
   baseUrl: {
-    type: String,
-    required: true
+    type: String
   },
   code: {
-    type: String,
-    required: true
+    type: String
   },
   title: {
-    type: String,
-    required: true
+    type: String
   },
   visits: {
-    type: Number,
+    type: Number
   },
   date: { 
     type: Date, default: Date.now
@@ -31,10 +27,23 @@ var LinkSchema = new Schema({
 
 var Link = mongoose.model('Link', LinkSchema);
 
-LinkSchema.pre = ('save', function(next) {
+//HOW WE ORIGINALLY WROTE IT, NOT SURE WHY THIS DOESN"T WORK BUT SOLUTION VERSION DOES?
+// LinkSchema.pre = ('save', function(next) {
+//   var shasum = crypto.createHash('sha1');
+//   shasum.update(this.url);
+//   this.code = shasum.digest('hex').slice(0, 5);
+//   next();
+// });
+
+var createSha = function(url) {
   var shasum = crypto.createHash('sha1');
-  shasum.update(this.url);
-  this.code = shasum.digest('hex').slice(0, 5);
+  shasum.update(url);
+  return shasum.digest('hex').slice(0, 5);
+};
+
+LinkSchema.pre('save', function(next) {
+  var code = createSha(this.url);
+  this.code = code;
   next();
 });
 

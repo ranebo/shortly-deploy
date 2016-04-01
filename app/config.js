@@ -7,7 +7,8 @@ var path = require('path');
 // });
 var mongoose = require('mongoose');
 //mongodb connection
-mongoose.connect('mongodb://localhost/shortlyDB');
+MongoURI = 'mongodb://localhost/shortlyDB';
+mongoose.connect(MongoURI);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
